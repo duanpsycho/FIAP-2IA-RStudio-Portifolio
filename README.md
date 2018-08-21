@@ -1,9 +1,9 @@
 # Portifolio in R - MBA FIAP
 This is my portifolio in R.
 
-Contains what I learned in my Masters Business Administration (MBA) in Artificial Inteligence and Machine Learning, FIAP, at São Paulo ,Brazil.
+Contains what I learned in my Masters Business Administration (MBA) in Artificial Inteligence and Machine Learning, FIAP, at São Paulo,Brazil.
 
-Here I uploaded a R Markdown and the HTML generated in Knit during my classes, which contains R commands, R plots, analysis in R, predictions, heatmaps, and other awesome stuff!
+Here I uploaded an R Markdown and the HTML generated in Knit during my classes, which contains R commands, R plots, analysis in R, predictions, heatmaps, and other awesome stuff!
 
 There are some files and one folder:
 * 1 - HTML generated in Knit, which will work in any browsers (Portifolio.html);
