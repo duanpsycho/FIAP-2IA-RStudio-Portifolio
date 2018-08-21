@@ -1,0 +1,754 @@
+---
+title: "Portifolio - Programando IA com R"
+author: "Duan Nunes Alves da Silva"
+date: "Agosto de 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Este documento possui o portifolio referente a aula de Programando IA com R, da faculdade FIAP, curso de MBA de Inteligencia Artificial e Machine Learning.
+
+# Aula 1
+**Exercicio 1 - Variaveis**:  
+Crie 10 variaveis e as salve em um arquivo no diretorio de preferencia. 
+
+```{r A1 - Exercicio 1}
+# Variaveis
+a <- 1
+b <- 2
+c <- 3
+d <- 4
+e <- 5
+f <- 6
+g <- 7
+h <- 8
+i <- 9
+j <- 10
+
+# Caminho para salvar um arquivo com as variaveis
+# path = choose.files()
+
+# Salvar as variaveis no diretorio informado acima
+# save(a, b, c, d, e, f, g, h, i, j, file=path)
+```
+
+**Exercicio 2 - Vetores, Listas, Matrizes e Dataframes**:  
+Crie um vetor para cada tipo de variavel do R, contendo quatro valores cada.
+```{r A1 - Exercicio 2 a}
+# Vetores
+vetor1 <- c(TRUE, FALSE, TRUE, FALSE)
+vetor2 <- c(1L, 2L, 3L, 4L)
+vetor3 <- c(11.3, 15.4, 7.6, 93.4)
+vetor4 <- c("Duan", "Nunes", "Alves", "Silva")
+vetor5 <- c(1i, 2i, 3i, 4i)
+```
+
+Crie uma lista com 5 elementos, cada elemento deve ser um dos vetores criados acima.
+```{r A1 - Exercicio 2 b}
+# Lista
+lista <- list(vetor1, vetor2, vetor3, vetor4, vetor5)
+```
+
+Crie uma matriz 4x4 com 16 valores inteiros pares.
+```{r A1 - Exercicio 2 c}
+# Matriz
+matrix <- matrix(1:16*2, nrow = 4, ncol = 4)
+```
+
+Crie um dataframe onde cada coluna seja um dos vetores criados acima. As linhas devem possuir os nomes L1, L2, L3 e L4.
+```{r A1 - Exercicio 2 d}
+# DataFrame
+dataframe = data.frame(vetor1, vetor2, vetor3, vetor4, vetor5)
+colnames(dataframe) = c('vet1', 'vet2', 'vet3', 'vet4', 'vet5')
+rownames(dataframe) = c('L1', 'L2', 'L3', 'L4')
+```
+
+# Aula 2  
+**Exercicio 1 - Vetores**:  
+Crie 6 vetores.  
+Vetor A de inteiros, com 5 numeros.  
+Vetor B com o dobro do Vetor A.  
+Vetor C com um terco do Vetor B.  
+Vetor D com C+2?.  
+Vetor E com Raiz quadrada de D.  
+Vetor AI com o inverso de A.   
+```{r A2 - Exercicio 1}
+# Vetores
+vetorA = c(123456, 12345678, 123, 123456, 1234)
+vetorB = vetorA * 2
+vetorC = vetorB/3
+vetorD = vetorC + (vetorA**2)
+vetorE = sqrt(vetorD)
+vetorAI = rev(vetorA)
+
+```
+
+**Exercicio 2 - Matrizes**:  
+Criar matrizes.  
+M1 6x5 com cada linha contendo o valor de um dos vetores.  
+M2 5x6 com cada coluna contendo o valor de um dos vetores.  
+M3 6x5 com cada elemento contendo 10% de M1, ou seja, M1 x 0,1.  
+```{r A2 - Exercicio 2 a}
+# Criando matriz
+m1 = matrix(c(vetorA, vetorB, vetorC, vetorD, vetorE, vetorAI),nrow = 6, ncol = 5, byrow = T)
+m2 = matrix(c(vetorA, vetorB, vetorC, vetorD, vetorE, vetorAI),nrow = 5, ncol = 6)
+m3 = m1 * 0.10
+```
+
+M4 5x6 sendo uma tabela com 5 linhas e 6 colunas de quaisquer colunas do dataset *attitude* .
+```{r A2 - Exercicio 2 b}
+# Consultando o tipo do dataset
+class(attitude)
+# Consultando a dimensao do dataset
+dim(attitude)
+# Criando matriz
+m4 = matrix(c(as.matrix(attitude[1:5, 1:6])), nrow = 5, ncol = 6)
+```
+
+**Exercicio 3**:  
+Crie uma matriz 19x19 com os valores 1 e 2 nos elementos, alternadamente.
+```{r A2 - Exercicio 3 a}
+# Criando matriz
+matriz1 = matrix(c(1,2), nrow = 19, ncol = 19, byrow = TRUE)
+```
+
+Subtrair 1 de cada elemento desta matriz.
+```{r A2 - Exercicio 3 b}
+# Criando matriz
+matriz2 = matriz1 -1
+```
+
+Somar 1 para cada elemento da linha 1, 2 na linha 2, e assim por diante ate a coluna 19.
+```{r A2 - Exercicio 3 c}
+# Criando matriz
+matriz3 = matriz2 + c(1:19)
+```
+
+**Exercicio 4**:  
+Crie matrizes.  
+M5 sendo a multiplicacao da matriz M1 e M3.  
+M6 sendo a multiplicacao da matriz M3 e M1.  
+M7 sendo a multiplicacao da M1 e M4.  
+M8 sendo a multiplicacao da M4 e M1.  
+```{r A2 - Exercicio 4 a}
+# Multiplicacao de Matriz
+m5 = m1 * m3
+m6 = m3 * m1
+m7 = m1 %*% m4
+m8 = m4 %*% m1
+```
+
+Compare as matrizes M5 com M6 e M7 com M8.
+```{r A2 - Exercicio 4 b}
+# Comparando matrizes
+m5 == m6
+# Erro, M7 e M8 possuem dimensÃµes diferentes
+dim(m7)
+dim(m8)
+# m7 == m8
+```
+
+**Exercicio 5**:  
+Obter a transporta M1T a M8T de cada uma das matrizes de M1 a M8.
+```{r A2 - Exercicio 5 a}
+# Transpostas
+m1t = t(m1)
+m2t = t(m2)
+m3t = t(m3)
+m4t = t(m4)
+m5t = t(m5)
+m6t = t(m6)
+m7t = t(m7)
+m8t = t(m8)
+```
+
+Compare as matrizes: M8 com M8T, M8T com M8.
+```{r A2 - Exercicio 5 b}
+m8 %*% m8t == m8t %*% m8
+```
+
+**Exercicio 6 - Malvadao**:  
+Obter o valor da matriz X na equacao A*X = B.
+```{r A2 - Exercicio 6 a}
+# Calcular a equacao A.X = B
+A = as.matrix(attitude[21:25, 1:5])
+B = as.matrix(attitude[11:15, 1:5])
+X = solve(A) %*% B 
+# Matrix Identidade de A * B
+# Erro esta apartir da 14 casa decimal
+# Necessario arredondar apartir da 12 casa, assim, a multiplicacao de A por X e igual a B.
+round(A %*% X,12) == B
+
+```
+
+**Exercicios 7 RMarkdown**:  
+Retornar todos os valores do Dataset Cars.
+```{r A2 - RMarkdown a}
+cars
+```
+
+Retornar os 5 primeiros valores do Dataset Cars.
+```{r A2 - RMarkdown b}
+head(cars, 5)
+```
+
+Retornar os 5 ultimos valores do Dataset Cars.
+```{r A2 - RMarkdown c}
+tail(cars, 5)
+```
+
+Retornar o resumo do Dataset Cars.
+```{r A2 - RMarkdown d}
+summary(cars)
+```
+
+Monte um grafico mostrando cruzamento dos valores do Dataset Cars.
+```{r A2 - RMarkdown e, echo = FALSE}
+plot(cars)
+```
+
+**Exercicios 8 - Special Values**:  
+Criar 5 variaveis com os tipos especiais.
+```{r A2 - Special Values a}
+# Tipos especiais
+te1 = NA
+te2 = sqrt(-4)
+te3 = 10/0
+te4 = -10/0
+te5 = NULL
+
+```
+
+Crie um vetor com os 5 tipos especiais criados anteriormente.
+```{r A2 - Special Values b}
+# Vetor
+vetorTE = c(te1, te2, te3, te4, te5)
+# Ã‰ possivel criar o vetor, porÃ©m, o dado NULL nÃ£o foi inserido.
+```
+
+Verificar os valores da 5 variaveis criadas anteriormente.
+```{r A2 - Special Values c}
+# Verificacao
+is.na(te1)
+is.nan(te2)
+is.infinite(te3)
+is.finite(te4)
+is.null(te5)
+```
+
+**Exercicios 10 - Sequencias**:  
+Crie uma variavel com 30 valores entre 5 e 10.
+```{r A2 - Sequencias a}
+# Distribuicao Uniforme
+my_seq <- seq(5.0, 10.0, length.out = 30)
+```
+
+Consulte o tamanho do vetor my_seq.
+```{r A2 - Sequencias b}
+length(my_seq)
+```
+Criar uma sequencia com o tamanho do vetor my_seq.
+```{r A2 - Sequencias c}
+new_seq = seq_len(length(my_seq))
+```
+
+# Aula 3  
+**Exercicio 1 - Simulando Modelo Linear**:
+```{r A3 - Modelo Linear a}
+set.seed(20)
+# Modelo Linear
+a = 2.0
+b = 0.5
+x = rnorm(100)
+e = rnorm(100, mean = 0, sd = 2)
+y = (a * x) + b + e
+plot(x=x, y=y)
+```
+
+**Exercicio 2 - Amostragem**:  
+Usando o dataset *airquality*, facaa:  
+Verifique as dimensoes do dataset.
+```{r A3 - Amostragem a}
+dim(airquality)
+```
+
+Obtenha o resumo das colunas.
+```{r A3 - Amostragem b}
+summary(airquality)
+```
+
+Exibir as 10 primeiras linhas
+```{r A3 - Amostragem c}
+head(airquality, 10)
+```
+Exibir 10 linhas aleatoriamente.
+```{r A3 - Amostragem d}
+set.seed(10)
+airquality[sample(nrow(airquality), 10), ] 
+```
+**Exercicio 3 - Loop**:  
+Crie um script que percorre o dataset *AirPassengers*.
+```{r A3 - Loop a}
+for (i in AirPassengers){
+  print(i)
+}
+```
+Crie um vetor que contenha o valor acumulado de passageiros ao longo do tempo.
+```{r A3 - Loop b}
+#Loop Acumulado
+total = 0
+vector = c()
+for (i in AirPassengers){
+  total = total + i
+  vector = c(vector, total)
+}
+print(vector)
+```
+**Exercicio 3 - Funcoes**:  
+Crie uma funcao fatorial que retorna o fatorial de um numero inteiro.
+```{r A3 - Funcoes a}
+Fatorial <- function (valor){
+  total = valor
+  while(valor > 1){
+    total = total * (valor - 1)
+    valor = (valor - 1)
+  }
+  return(total)
+}
+Fatorial(5)
+```
+Crie uma funcao que retorne a mesma resposta do exercicio 'Loop acumulado'.
+Passar o dataset *AirPassagers* como parametro.
+Passar a coluna 'mpg' do dataset *mtcars* como parametro.
+```{r A3 - Funcoes b}
+Loop.Acumulado = function(data){
+total = 0
+vector = c()
+for (i in data){
+  total = total + i
+  vector = c(vector, total)
+  }
+return (vector)
+}
+# Chama a Funcao - Air Passengers
+Loop.Acumulado(AirPassengers)
+# Chama a Funcao - mtcars, coluna mpg
+Loop.Acumulado(mtcars$mpg)
+```
+# Aula 4  
+**Exercicio 1 - Download de arquivos da Internet**  
+Crie uma funcao que receba um URL e baixe o arquivo sempre na pasta /data.
+```{r A4 - Downloads a}
+baixa_arquivos = function(file.url){
+  if (!file.exists('data')){
+    dir.create('data')
+  }
+file.local = file.path('./data', basename(file.url))
+download.file(url = file.url, destfile = file.local , mode='wb')
+}
+```
+
+Baixe os arquivos listados atraves da funcao criada.
+```{r A4 - Downloads b}
+#1
+file.url = 'https://raw.githubusercontent.com/elthonf/fiap-mba-r/master/data/Copas.csv'
+baixa_arquivos(file.url)
+#2
+file.url = 'https://raw.githubusercontent.com/elthonf/fiap-mba-r/master/data/Copas-Partidas.csv'
+baixa_arquivos(file.url)
+#3
+file.url = 'https://raw.githubusercontent.com/elthonf/fiap-mba-r/master/data/Copas-Jogadores.csv'
+baixa_arquivos(file.url)
+```
+
+**Exercicio 2 - Lendo arquivos Excel**  
+Baixe os arquivos de Baltimore.
+```{r A4 - Excel a}
+
+library("xlsx")
+file.url = 'https://raw.githubusercontent.com/elthonf/fiap-mba-r/master/data/cameras.baltimore.xlsx'
+baixa_arquivos(file.url)
+file = read.xlsx(file = './data/cameras.baltimore.xlsx', sheetIndex = 1, header = TRUE, encoding = 'UTF-8')
+```
+
+Identifique a camera de radar mais ao Norte, ao Sul, ao Leste e ao Oeste, lendo o dataset de Baltimore.
+```{r A4 - Excel b}
+# Sul
+min(file$Lat)
+# Norte
+max(file$Lat)
+# Oeste
+min(file$Long)
+# Leste
+max(file$Long)
+```
+
+**Exercicio 3 - Dplyr**  
+Carregue o dataset *BrFlights2* e crie novas colunas usando o comando MUTATE.
+```{r A4 - Dplyr a, message=FALSE}
+library("tidyverse")
+library("dplyr")
+load("./data/BrFlights2.RData")
+BrFlights2 = mutate(BrFlights2, 
+                    Partida.Atraso = (BrFlights2$Partida.Real - BrFlights2$Partida.Prevista),
+                    Chegada.Atraso = (BrFlights2$Chegada.Real - BrFlights2$Chegada.Prevista),
+                    DistanciaEuc = sqrt((BrFlights2$LongOrig - BrFlights2$LongDest)^2 + (BrFlights2$LatOrig - BrFlights2$LatDest)^2),                    
+                    TempoViagem.Real = (BrFlights2$Chegada.Real - BrFlights2$Partida.Real))
+```
+
+Crie as mesmas colunas solicitadas anteriormente e adicione a coluna de Atraso.Relativo, mas desta vez utilizando pipe.
+```{r A4 - Dplyr b}
+BrFlights2 = BrFlights2 %>% 
+  mutate(Partida.Atraso = Partida.Real - Partida.Prevista) %>% 
+  mutate(Chegada.Atraso = Chegada.Real - Chegada.Prevista) %>% 
+  mutate(DistanciaEuc = sqrt((LongOrig - LongDest)^2 + (LatOrig - LatDest)^2)) %>% 
+  mutate(TempoViagem.Real = Chegada.Real - Partida.Real) %>% 
+  mutate(Atraso.Relativo = Chegada.Atraso - mean(Chegada.Atraso, na.rm = TRUE))
+```
+
+Quais sao os Voos da Azul no dataset?
+```{r A4 - Dplyr c}
+BrFlights2 %>% filter(Companhia.Aerea == "AZUL") -> Azul
+```
+
+Quais sao os 100 maiores atrasos de chegada de voos nacional/regionais?
+```{r A4 - Dplyr d, message=FALSE}
+BrFlights2 %>% filter(Codigo.Tipo.Linha != 'Internacional') %>% 
+  arrange(desc(Chegada.Atraso)) %>% 
+  head(100)
+```
+Qual companhia aerea com maior atraso medio? 
+```{r A4 - Dplyr e, message=FALSE}
+BrFlights2 %>% 
+    group_by(Companhia.Aerea) %>% 
+    summarise(medio = mean(Chegada.Atraso, na.rm = TRUE)) %>% 
+    arrange(desc(medio)) %>% 
+    head(1)
+```
+
+# Aula 5 - Plots  
+**Exercicio 1 - Plot**
+Gerar um grafico do dataset *cars* com a relacao velocidade x distancia percorrida ate parar.
+```{r A5 - Plots a}
+plot(x = cars$speed, y=cars$dist)
+```
+
+**Exercicio 2 - Basic Plot**  
+Utilizando o dataset *airquality*, gere um grafico.
+```{r A5 - Plots b, echo=TRUE, fig.keep='all', message=FALSE}
+library("lattice")
+library("ggplot2")
+library("plotly")
+library("plot3D")
+#
+s =  airquality %>% 
+     filter( Month == 5 ) %>%
+     select( Ozone ) %>%
+     summary()
+
+airquality %>% filter(Month == 5) %>% 
+               select (Ozone) %>% 
+               arrange(Ozone) %>% 
+               unlist() %>% 
+               plot() %>% 
+               lines(x = 0:27, y = rep( 1.00, 27+1), type = 'l', col='BLUE') %>% 
+               lines(x = 0:27, y = rep(11.00, 27+1), type = 'l', col='BLUE') %>% 
+               lines(x = 0:27, y = rep(18.00, 27+1), type = 'l', col='RED') %>% 
+               lines(x = 0:27, y = rep(31.50, 27+1), type = 'l', col='BLUE') %>% 
+               lines(x = 0:27, y = rep(115.00, 27+1), type = 'l', col='BLUE')
+
+```
+
+Crie um Boxplot utilizando o dataset *airquality*, que permita a avaliacao mensal de Ozonio.
+```{r A5 - Plots c}
+boxplot(airquality$Ozone ~ airquality$Month)
+```
+
+Qual mes possui maior media de O3?
+Qual mes possui maior concentracao de O3?
+Qual mes apresenta a menor variancia de O3? E o menor?
+Qual o mes com a maior temperatura media?
+E qual tem a maior temperatura registrada?
+O mes com mais ventos e o mesmo que possui mais radiacao solar?
+```{r A5 - Plots D}
+boxplot(airquality$Ozone ~ airquality$Month)
+boxplot(airquality$Temp ~ airquality$Month)
+boxplot(airquality$Wind ~ airquality$Month)
+boxplot(airquality$Solar ~ airquality$Month)   
+```
+
+Gerando dois graficos no mesmo plot usando a funcao WITH.
+
+```{r A5 - Plots E}
+par(mfrow=c(1,2))
+with (airquality, {
+  plot(Wind, Ozone, main = 'Ozonio pelo Vento')
+  plot(Solar.R, Ozone, main = 'Ozonio pelo Radial')
+})
+```
+
+Usando Lattice para gerar graficos.
+```{r A5 - Plots F}
+state <- data.frame(state.x77, region = state.region)
+xyplot(Life.Exp ~ Income | region, data = state, layout = c(4, 1))
+
+```
+
+# Aula 6 - Clustering
+**Exercicio 1 - Plot**  
+Criar uma populacao amostral com duas dimensoes, X e Y, usando distribuiacao normal, considerando:  
+- 15 observacoes;  
+- 3 centroides;  
+- 5 observacoes por centroide.  
+Ao fianal, fa?a um plot.
+```{r A6 - Clustering A, echo=TRUE, message=FALSE}
+library("dplyr")
+library("readr")
+library("plotly")
+library("zoo")
+library("dendextend")
+library("ape")
+
+set.seed(10)
+x = rnorm(15, mean = rep(1:3, each = 5), sd = 0.2)
+y = rnorm(15, mean = rep(c(1, 2), each = 5), sd = 0.2)
+
+# pch = tipo do icone
+# cex = tamanho do pixel
+plot(x, y, col = 'red', pch = 19, cex = 1)
+# adiciona os nomes no plot
+text(x + 0.05, y + 0.05, labels = as.character(1:15))
+
+```
+
+Executando K-Means para o exemplo acima:
+```{r A6 - Clustering B, echo=TRUE}
+set.seed(10)
+x = rnorm(15, mean = rep(1:3, each = 5), sd = 0.2)
+y = rnorm(15, mean = rep(c(1, 2), each = 5), sd = 0.2)
+my_data = data.frame(x,y)
+modelo = kmeans(x = my_data, centers = 3)
+plot(x, y, col = modelo$cluster, pch = 19, cex = 1)
+text(x + 0.05, y + 0.05, labels = as.character(1:15))
+```
+
+**Exercicio 2 - Fifa dataset**  
+Filtre o dataset Fifa com o atributos name, dribbling e acceleration, para os 602 jogadores da liga espanhola. Ao final, plotar o resultado.
+```{r A6 - Fifa a, message=FALSE}
+library("readr")
+fifa_game = read_csv("./data/fifa game-2.csv",locale = locale(encoding = 'ISO-8859-1'))
+
+clean = fifa_game %>% filter(fifa_game$league == 'Spanish Primera División') %>% 
+              select(name, dribbling, acceleration)
+
+plot(y=clean$acceleration, x=clean$dribbling)
+
+```
+
+Execute o KMeans com 4 centroides.
+```{r A6 - Fifa b}
+set.seed(10)
+my_data = data.frame(clean$dribbling, clean$acceleration)
+modelo = kmeans(x = my_data, centers = 4)
+plot(clean$dribbling, clean$acceleration, col = modelo$cluster, pch = 16, cex = 1)
+points(modelo$centers, col = 6, bg = 5, pch = 24, cex = 3, lwd = 2)
+```
+
+Utilizando plotly para visualizacao.
+```{r A6 - Fifa c}
+#Com o Plotly
+plot_ly(data = clean, 
+        x = ~dribbling, y = ~acceleration, 
+        text = ~name, 
+        type = 'scatter', 
+        mode='markers',
+        color = modelo$cluster)
+
+```
+
+Utilizando Plot 3D.
+```{r A6 - Fifa d}
+#Plot 3d
+clean3d = fifa_game %>% filter(fifa_game$league == 'Spanish Primera División') %>% 
+  select(name, dribbling, acceleration, long_passing)
+set.seed(2)
+my_data = data.frame(clean3d$dribbling, clean3d$acceleration, clean3d$long_passing)
+modelo = kmeans(x = my_data, centers = 4)
+plot(clean$dribbling, clean$acceleration, col = modelo$cluster, pch = 19, cex = 1)
+points(modelo$centers, col = 6, bg = 5, pch = 19, cex = 3, lwd = 2)
+
+```
+
+Utilizando Plotly 3D para visualizacao.
+```{r A6 - Fifa e}
+plot_ly(data = clean3d , 
+        x = ~dribbling, y = ~acceleration, z = ~long_passing, 
+        text = ~name, 
+        type = 'scatter3d', 
+        mode = 'markers',
+        color = modelo$cluster,
+        size = rep(1, dim(clean3d)[1], sizes = c(3.0)))
+
+```
+
+asdasda
+```{r A6 - Heatmap a}
+#Mapa de calor
+library("tidyr")
+
+fifa_cores  = c("white", "#63be7b", "#ffeb84",  "#f8696b")
+fifa_gradiente = colorRampPalette(fifa_cores)(n = 30)
+
+fifa_game %>% filter(league=='Spanish Primera División') %>% 
+              select (name, age, height_cm, dribbling) -> spain.colors
+with(spain.colors, plot(x = height_cm, y = age))
+
+alturas = min(spain.colors$height_cm):max(spain.colors$height_cm)
+idades = min(spain.colors$age):max(spain.colors$age)
+#
+crossing(height_cm = alturas,
+         age = idades
+         ) -> spain.colors.crossing
+#
+spain.colors %>%
+  group_by(height_cm, age) %>% 
+  summarise(
+    dribbling.avg = mean(dribbling)
+  ) %>% 
+  right_join(spain.colors.crossing, by=c('height_cm' = 'height_cm', 'age'='age')) %>% 
+  na.fill(fill=0) %>%
+  data.frame() -> spain.colors.group 
+#
+with(spain.colors.group,
+  image(x = alturas,
+       xlab = "Altura cm",
+       y = idades,
+       ylab = "Idade",
+       main = "Dribbling",
+       z = t(matrix(dribbling.avg, nrow = length(idades)) ),
+       col = fifa_gradiente
+       )
+)
+```
+
+# Aula 7  
+** Exercicio 1 - Arvore de Decisao**  
+Faca uma arvora de decisao para o dataset *iris* utilizando todos os atributos.
+```{r A7 - Arvore de Decisao, message=FALSE}
+library("plyr")
+library("tree")
+
+set.seed(10)
+iris.modelo = tree(data = iris, formula = Species ~ Sepal.Width + Petal.Width + Sepal.Length + Petal.Length)
+plot(iris.modelo)
+text(iris.modelo)
+# Resultado com todas variaveis reduz o erro para 2%
+# Deterministico: Sempre da o mesmo resultado na arvore, ou seja, o mesmo peso.
+# Nao e necesserio Normalizacao
+summary(iris.modelo)
+```
+
+**Exercicio 2 - Random Forest**  
+Utilize Random Forest para gerar uam regressao no dataset *MASS:Boston*.
+```{r A7 - Random Forest, message=FALSE}
+library("randomForest")
+set.seed(10)
+ind = sample(2, nrow(MASS::Boston), replace=TRUE, prob=c(0.7, 0.3))
+# Treino
+bostonTrain = MASS::Boston[ind==1,]
+# Teste
+bostonTest = MASS::Boston[ind==2,]
+
+# Gerando Modelo
+boston.model = randomForest(medv ~., data = bostonTrain, ntree=500, proximity=TRUE)
+predicao = predict(boston.model, bostonTest[,1:13])
+plot(boston.model)
+summary(boston.model)
+```
+
+# Aula 8  - Reducao de Dimensionalidade  
+**Exercicio 1 - Correlacao**  
+Verificando correlacao dos dados
+```{r A8 - RD a}
+set.seed(10)
+x = 1:10 + rnorm(10)
+y = (1:10*2) - rnorm(10, mean = 2 )
+plot(x=x, y=y, pch=4)
+modelo = lm(y ~ x, data.frame(x,y))
+abline( modelo , col="red")
+sprintf("Correlacao: %f", cor(x=x, y=y))
+```
+
+Carregue o dataset *spam*, identifique as colunas com correlacao acima de 80%, plot as colunas para visualizacao.
+```{r A8 - RD b, message=FALSE}
+library("caret")
+library("kernlab")
+
+data(spam) 
+
+# Correlacao
+relation = cor(spam[,-58])
+# Filtro de correlacao
+relation[relation >= 0.8]
+
+```
+
+**Exercicio 2 - Predicao**  
+Realize uma predicao utilizando o dataset *spam*.
+```{r A8 - RD c, echo=TRUE, fig.keep='all', message=FALSE, warning=FALSE}
+set.seed(10)
+library("e1071")
+# Separacao dos datasets
+index = sample(2, nrow(spam), replace=TRUE, prob=c(0.7, 0.3))
+
+# Treino
+spam_treino = spam[index==1,]
+
+# Teste
+spam_teste = spam[index==2,]
+
+# Correlacoes
+# Remove atributo alvo
+correlacoes <- spam_treino[,-58]
+# Matriz com valores absolutos das correlacoes
+matriz <- abs(cor(correlacoes))
+# Matriz diagonal
+diag(matriz) <- 0
+# Retorna onde os indices sao TRUE
+which(matriz > 0.8, arr.ind = T)
+
+# Correlacao das colunas
+sprintf("Correlacao: %f", cor(spam_treino$num415, spam_treino$num857))
+
+# Dados correlacionados
+plot(spam_treino$num415, spam_treino$num857)
+
+# Definindo qual tecnica de reducao utilizar
+plot(spam_treino$num415 + spam_treino$num857)
+plot(spam_treino$num415 - spam_treino$num857)
+plot(spam_treino$num415 * spam_treino$num857)
+plot(spam_treino$num415 / spam_treino$num857)
+
+# Treino
+spam_treino = mutate(spam_treino, novoCampo = (spam_treino$num415 + spam_treino$num857)*0.5)
+spam_treino$num415 = NULL
+spam_treino$num857 = NULL
+
+# Teste
+spam_teste = mutate(spam_teste, novoCampo = (spam_teste$num415 + spam_teste$num857)*0.5)
+spam_teste$num415 = NULL
+spam_teste$num857 = NULL
+
+# Regressao
+regressao = train(type ~ . , spam_treino, method="glm")
+regressao
+predicao = predict(regressao, spam_teste)
+# 2 as spam
+# 1 as nonspam
+
+confusionMatrix(predicao, spam_teste$type)
+```
+
